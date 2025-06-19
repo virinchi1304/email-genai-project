@@ -1,0 +1,5 @@
+Classify this email into one of the following categories: 'Personal', 'Work', 'Spam', 'Finance':
+
+{{email}}
+
+Answer:

@@ -1,0 +1,13 @@
+Rewrite the following email in a {{tone}} tone. Return only the rewritten version as a properly formatted email. It should include:
+- A neutral greeting (e.g., "Hi" or "Hello")
+- A polite, rewritten body
+- A formal closing (e.g., "Best regards")
+
+Do NOT include:
+- Subject line
+- Names (real or placeholders)
+- Titles like "Sir/Madam"
+- Any explanation like "Here is the rewritten email:"
+- Any extra commentary or justification
+
+{{email}}
