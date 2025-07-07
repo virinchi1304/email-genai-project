@@ -1,5 +1,13 @@
-Classify this email into one of the following categories: 'Personal', 'Work', 'Spam', 'Finance':
+You are an intelligent email classifier.
 
+Classify the following email strictly into **only one** of these categories:
+- Personal
+- Work
+- Spam
+- Finance
+
+Reply with exactly one of these four words: Personal, Work, Spam, or Finance.
+Do not provide any additional text or explanation. Just return the category name.
+
+Email:
 {{email}}
-
-Answer:

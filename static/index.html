@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>Email Classifier & Rewriter</title>
     <style>
         body {
@@ -38,13 +39,16 @@
 
         button {
             margin-top: 15px;
-            background-color: #e0e0e0;
+            background-color: #2196F3;
             border: none;
+            color: white;
             cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #ccc;
+            background-color: #1976D2;
         }
 
         hr {
@@ -57,6 +61,13 @@
             border-left: 4px solid #2196F3;
             font-family: monospace;
             white-space: pre-wrap;
+            min-height: 50px;
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -66,46 +77,60 @@
     <div class="container">
         <h1>Email Classifier</h1>
         <textarea id="classifyInput" rows="4" placeholder="Enter email to classify"></textarea>
-        <button onclick="classifyEmail()">Classify</button>
+        <button onclick="classifyEmail()">Classify Email</button>
         <p id="classifyResult"></p>
 
         <hr>
 
         <h1>Email Rewriter</h1>
         <textarea id="rewriteInput" rows="4" placeholder="Enter email to rewrite"></textarea>
-        <label for="toneSelect">Tone:</label>
+        <label for="toneSelect">Select Tone:</label>
         <select id="toneSelect">
-            <option value="professional">Professional</option>
-            <option value="friendly">Friendly</option>
-            <option value="apologetic">Apologetic</option>
-            <option value="casual">Casual</option>
+            <option value="Professional">Professional</option>
+            <option value="Friendly">Friendly</option>
+            <option value="Apologetic">Apologetic</option>
+            <option value="Casual">Casual</option>
         </select>
-        <button onclick="rewriteEmail()">Rewrite</button>
+        <button onclick="rewriteEmail()">Rewrite Email</button>
         <p id="rewriteResult"></p>
     </div>
 
     <script>
         async function classifyEmail() {
             const email = document.getElementById("classifyInput").value;
-            const res = await fetch("/classify", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
-            });
-            const data = await res.json();
-            document.getElementById("classifyResult").innerText = "Category: " + (data.category || "Error");
+            try {
+                const res = await fetch("/classify", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email }),
+                });
+                if (!res.ok) {
+                    throw new Error("Server Error");
+                }
+                const data = await res.json();
+                document.getElementById("classifyResult").innerText = "Category: " + (data.category || "Error");
+            } catch (err) {
+                document.getElementById("classifyResult").innerText = "Error: " + err.message;
+            }
         }
 
         async function rewriteEmail() {
             const email = document.getElementById("rewriteInput").value;
             const tone = document.getElementById("toneSelect").value;
-            const res = await fetch("/rewrite", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, tone }),
-            });
-            const data = await res.json();
-            document.getElementById("rewriteResult").innerText = data.rewritten_email || "Error";
+            try {
+                const res = await fetch("/rewrite", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, tone }),
+                });
+                if (!res.ok) {
+                    throw new Error("Server Error");
+                }
+                const data = await res.json();
+                document.getElementById("rewriteResult").innerText = data.rewritten_email || "Error";
+            } catch (err) {
+                document.getElementById("rewriteResult").innerText = "Error: " + err.message;
+            }
         }
     </script>
 

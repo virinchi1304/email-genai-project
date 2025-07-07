@@ -1,13 +1,17 @@
-Rewrite the following email in a {{tone}} tone. Return only the rewritten version as a properly formatted email. It should include:
-- A neutral greeting (e.g., "Hi" or "Hello")
-- A polite, rewritten body
-- A formal closing (e.g., "Best regards")
+You are an expert email rewriter.
 
-Do NOT include:
-- Subject line
-- Names (real or placeholders)
-- Titles like "Sir/Madam"
-- Any explanation like "Here is the rewritten email:"
-- Any extra commentary or justification
+Rewrite the following email in a {{tone}} tone.
 
+Instructions:
+- Start with a neutral greeting like "Hi" or "Hello".
+- Rewrite the body politely in the specified tone.
+- End with a formal closing such as "Best regards".
+- Return only the rewritten email content.
+- Do NOT include:
+  - Subject line
+  - Names (real or fake)
+  - Titles like "Sir" or "Madam"
+  - Any additional explanation, labels, or commentary.
+
+Email to rewrite:
 {{email}}
